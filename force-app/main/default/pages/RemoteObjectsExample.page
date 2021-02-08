@@ -1,0 +1,53 @@
+<apex:page>
+    <apex:remoteObjects>
+        <apex:remoteObjectModel name="Account" fields="Name,Id"></apex:remoteObjectModel>
+        <apex:remoteObjectModel name="Project__c" jsShorthand="Project" fields="Name,Id">
+            <apex:remoteObjectField name="Account__c" jsShorthand="AccountId"/>
+            <apex:remoteObjectField name="Status__c" jsShorthand="Status"/>
+
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+
+    <script>
+        function Account(name) {
+            var account = new SObjectModel.Account();
+
+            this.id = null;
+            this.projects = [];
+
+            account.retrieve({
+                where: { Name: {eq: name} }, limit: 1 
+            },
+            (err, records) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if(records.length) {
+                        this.id = records[0].get('id');
+                        this.loadProjects();
+                    }
+                }
+            });
+
+        }
+
+        Account.prototype.loadProjects = function(){
+            var project = new SObjectMode.Project();
+
+            project.retrieve({ where: {AccountId: {eq: this.id} } },
+            (err, records) => {
+                if(err){
+                    console.log(err);
+                } else {
+                    if(records.length){ records.forEach((record) => {
+                            this.projects.push(record.get('Name'));
+                        });
+                        console.log(this.projects.length + ' projects found.');
+                    }
+                }
+            });
+        }
+
+        testAccount = new Account('Test Account');
+    </script>
+</apex:page>
