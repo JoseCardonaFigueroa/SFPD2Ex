@@ -1,0 +1,28 @@
+<aura:component implements="force:apphostable,flexipage:availableForAllPageType">
+    <aura:attribute name="Result" type="String"></aura:attribute>
+    <aura:attribute name="Order" type="Integer"></aura:attribute>
+
+    <!--
+        Indicates what event is fired
+    -->
+    <aura:registerEvent name="eventReceived" type="c:EventReceived" ></aura:registerEvent>
+
+    <!--
+        This is what handles the event
+        The action attribute indicates the controller method that is going to be executed
+        Phase indicates the phase in which the event is captured
+    -->
+    <aura:handler name="eventReceived" event="c:EventReceived" action="{! c.handleEvent }" phase="capture"></aura:handler>
+
+    <div class="slds-box sldds-theme_default slds-m-top-small">
+        Component B <br/>
+
+        <lightning:button label="Send Event" onclick="{! c.sendEvent }"/>
+
+        <div class="slds-grid slds-glutters">
+            <div class="slds-col slds-size_1-of-2">
+                <c:EventComponentC result="{! v.Result }">s</c:EventComponentC>
+            </div>
+        </div>
+    </div>
+</aura:component>	
