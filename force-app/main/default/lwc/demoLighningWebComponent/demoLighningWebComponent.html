@@ -1,0 +1,10 @@
+<template >
+    <template for:each={contacts.data} for:item="contact">
+        <tr class="slds-hint-parent" key={contact.id}>
+            <td>{contact.Name}</td>
+            <td>{contact.Email}</td>
+            <td>{contact.Birthdate}</td>
+            
+        </tr>
+    </template>
+</template>

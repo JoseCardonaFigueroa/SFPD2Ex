@@ -1,0 +1,39 @@
+<aura:component implements="flexipage:availableForRecordHome, force:hasRecordId"><!--inherit recordId attribute-->
+    <aura:attribute name="record" type="Object" description="The record object to be displayed"></aura:attribute>
+    <aura:attribute name="simpleRecord" type="Object" description="A simplified view record object to be displayed"></aura:attribute>
+    <aura:attribute name="recordError" type="String" description="}An error message bound to force:recordData">
+
+    </aura:attribute>
+
+    <!--
+        This allows to call the Lighning Data Service
+        It is best practice to use the fields to improve performance
+
+
+    -->
+    <force:recordData 
+        aura:id="record" 
+        fields="Name,billingCity,BillingState" 
+        recordId="{! v.recordId }" 
+        targetError="{!v.recordError}" 
+        targetFields="{! v.simpleRecord}"
+        mode="VIEW">
+    </force:recordData>
+
+    <lightning:card iconName="standard:account" title="{! v.simpleRecord.Name }">
+        <div class="slds-p-horizontal--small">
+            <p class="slds-text-heading--small">
+                <lightning:formattedText title="Billing City" value="{! v.simpleRecord.billingCity }"> </lightning:formattedText>
+            </p>
+            <p class="slds-text-heading--small">
+                <lightning:formattedText title="Billing State" value="{! v.simpleRecord.BillingState}"></lightning:formattedText>
+            </p>
+        </div>
+    </lightning:card>
+
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            {!v.recordError}
+        </div>
+    </aura:if>
+</aura:component>	
