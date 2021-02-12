@@ -9,7 +9,8 @@
                       targetError="{!v.recordError}"
                       targetRecord="{!v.record}"
                       targetFields="{!v.accountRecord}"
-                      mode="EDIT">
+                      mode="EDIT"
+                      recordUpdated="{!c.handleRecordupdate}">
     </force:recordData>
 
     <lightning:card iconName="standard:account" title="{!v.accountRecord.Name}">
