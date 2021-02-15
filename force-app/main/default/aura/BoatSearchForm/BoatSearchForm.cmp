@@ -1,0 +1,57 @@
+<aura:component 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" 
+                controller="BoatTypesController"
+                >
+    <aura:attribute name="boatTypes" type="BoatType__c[]" default=""/>
+    <aura:attribute name="showNewBtn" type="Boolean" default="false" access="private"/>
+    <aura:attribute type="BoatType__c" name="selectedBoatType"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="c-container">
+        
+        <form>
+            <lightning:card iconName="standard:contact" title="Find a Boat">
+
+                <h2 class="slds-page-header__title">Find a boat</h2>
+                
+                <lightning:layout  horizontalAlign="center" verticalAlign="end">
+                    <lightning:layoutItem flexibility="auto" padding="around-small" size="2">
+                        
+                        <!-- 
+                            Iterate through the array passed in the boatTypes attribute so it
+                            can be displayed in the options
+                        -->
+                        <lightning:select  name="comboboxBoatType" 
+                                            aura:id="boatTypes"
+                                            value="" 
+                                            variant="label-hidden"
+                                            onchange="{! c.selectChanged }">
+                            <option value="">All types</option>
+                            
+                            <!-- 
+								Iterate through the array passed in the boatTypes attribute so it
+								can be displayed in the options
+							-->
+                            <aura:iteration items="{!v.boatTypes}" var="bType">
+                                <option value="{!bType.Id}" text="{!bType.Name}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                    </lightning:layoutItem>
+                    
+                    <lightning:layoutItem padding="around-small">
+                        <!-- Brand variant: Identifies the primary action in a group of buttons -->
+                        <lightning:button variant="brand" label="Search" title="Search action" onclick="{! c.onClickNewBoat }"  />
+                        <!-- Neutral variant (default) -->
+                        <aura:if isTrue="{!v.showNewBtn}">
+                            <lightning:button label="New" title="New action" onclick="{! c.onClickNewBoat }" />
+                        </aura:if>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:card>
+        </form>
+    </div>
+    
+	
+</aura:component>
