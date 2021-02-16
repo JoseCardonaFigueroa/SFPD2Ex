@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute type="Boat__c[]" name="boats" default="[
+    {
+        'id': 'a0209000002Df9YAAS',
+        'Name': 'All In The Family',
+        'Picture__c' : '/resource/Houseboats/fishingboat1.png',
+    }]"/>
+    
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12">
+            <lightning:layout>
+                <aura:iteration items="{! v.boats }" var="b">
+                    <lightning:layoutItem size="3">
+                        <c:BoatTile boat="{! b }"/>
+                    </lightning:layoutItem>
+                </aura:iteration>
+                
+            </lightning:layout>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>	

@@ -1,0 +1,20 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute type="Boat__c" name="boat" default="[
+    {
+        'id': 'a0209000002Df9YAAS',
+        'Name': 'All In The Family',
+        'Picture__c' : '/resource/Houseboats/fishingboat1.png',
+    }]"/>
+    <lightning:button variant="base" onclick="{! c.handleClick}" class="tile">
+        <div class="innertile">
+            <div class="lower-third">
+                <h1 class="slds-truncate">
+                    <img src="{! v.boat.Picture__c}" alt="" class=""/>
+
+                    tESTING
+                    {! v.boat.Name}
+                </h1>
+            </div>
+        </div>
+    </lightning:button>
+</aura:component>	
