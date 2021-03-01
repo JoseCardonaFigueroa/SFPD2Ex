@@ -1,0 +1,22 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="BoatSearchResults">
+    <aura:handler name="formSubmittedEvt" event="c:FormSubmit" action="{!c.onFormSubmit}"/>
+    <div class="c-container">
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem size="12" class="c-margin-bottom">
+                <lightning:card>
+                    <c:BoatSearchForm/>
+                </lightning:card>
+            	
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12">
+            	<lightning:card title="Matching boats" class="c-margin-bottom">
+                    <c:BoatSearchResults aura:id="boatSearchResultsCmp"/>
+                </lightning:card>
+            </lightning:layoutItem>
+        	
+        </lightning:layout>
+
+    </div>
+    
+    
+</aura:component>

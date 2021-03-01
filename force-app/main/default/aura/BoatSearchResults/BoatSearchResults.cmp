@@ -1,14 +1,31 @@
-<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" controller="BoatSearchResults">
     <aura:attribute type="Boat__c[]" name="boats" default="[
     {
         'id': 'a0209000002Df9YAAS',
         'Name': 'All In The Family',
         'Picture__c' : '/resource/Houseboats/fishingboat1.png',
     }]"/>
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <aura:attribute name="boatTypeId" type="String"/>
+    <aura:method name="search" action="{! c.doSearch }">
+    	 <aura:attribute name="boatTypeId" type="String"/>
+    </aura:method>
     
     <lightning:layout multipleRows="true">
+        <aura:if isTrue="{!v.boats.length > 0}">
+            <aura:iteration items="{!v.boats}" var="bot">
+                <lightning:layoutItem  size="3" flexibility="grow" class="slds-m-around_small">
+                    <c:BoatTile boat="{!bot}" />
+                </lightning:layoutItem>
+            </aura:iteration>
+            <aura:set attribute="else">
+                <lightning:layoutItem class="slds-align_absolute-center" flexibility="auto" padding="around-small">
+                    <ui:outputText value="No boats found" />
+                </lightning:layoutItem>
+            </aura:set>
+        </aura:if>
 
-        <lightning:layoutItem padding="around-small" size="12">
+        <!--<lightning:layoutItem padding="around-small" size="12">
             <lightning:layout>
                 <aura:iteration items="{! v.boats }" var="b">
                     <lightning:layoutItem size="3">
@@ -17,6 +34,6 @@
                 </aura:iteration>
                 
             </lightning:layout>
-        </lightning:layoutItem>
+        </lightning:layoutItem>-->
     </lightning:layout>
-</aura:component>	
+</aura:component>

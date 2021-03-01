@@ -19,6 +19,8 @@
 	},
     
     enableNewBoatBtn : function(component, event){
+        
+        // Checks if record creation is supported
         var isEnabled=$A.get("e.force:createRecord");
         if(isEnabled){
             component.set("v.showNewBtn",true);

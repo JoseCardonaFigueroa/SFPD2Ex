@@ -1,13 +1,12 @@
-<aura:component 
-                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
-                access="global" 
-                controller="BoatTypesController"
-                >
-    <aura:attribute name="boatTypes" type="BoatType__c[]" default=""/>
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" 
+                controller="BoatTypeController">
+	<aura:attribute name="boatTypes" type="BoatType__c[]" default=""/>
     <aura:attribute name="showNewBtn" type="Boolean" default="false" access="private"/>
     <aura:attribute type="BoatType__c" name="selectedBoatType"/>
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="formSubmittedEvt" type="c:FormSubmit"/>
+    
     
     <div class="c-container">
         
@@ -42,7 +41,7 @@
                     
                     <lightning:layoutItem padding="around-small">
                         <!-- Brand variant: Identifies the primary action in a group of buttons -->
-                        <lightning:button variant="brand" label="Search" title="Search action" onclick="{! c.onClickNewBoat }"  />
+                        <lightning:button variant="brand" label="Search" title="Search action" onclick="{! c.onFormSubmit }"  />
                         <!-- Neutral variant (default) -->
                         <aura:if isTrue="{!v.showNewBtn}">
                             <lightning:button label="New" title="New action" onclick="{! c.onClickNewBoat }" />
@@ -52,6 +51,4 @@
             </lightning:card>
         </form>
     </div>
-    
-	
 </aura:component>

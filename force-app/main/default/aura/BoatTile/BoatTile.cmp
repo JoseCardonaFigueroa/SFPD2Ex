@@ -1,20 +1,12 @@
-<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
-    <aura:attribute type="Boat__c" name="boat" default="[
-    {
-        'id': 'a0209000002Df9YAAS',
-        'Name': 'All In The Family',
-        'Picture__c' : '/resource/Houseboats/fishingboat1.png',
-    }]"/>
-    <lightning:button variant="base" onclick="{! c.handleClick}" class="tile">
-        <div class="innertile">
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="boat" type="Boat__c[]"/>
+    <!--<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>-->
+    <lightning:button class="tile">
+        <!-- Image -->
+        <div style="{!'background-image: url(\'' + v.boat.Picture__c + '\')'}" class="innertile">
             <div class="lower-third">
-                <h1 class="slds-truncate">
-                    <img src="{! v.boat.Picture__c}" alt="" class=""/>
-
-                    tESTING
-                    {! v.boat.Name}
-                </h1>
+                <h1 class="slds-truncate">{!v.boat.Name}</h1>
             </div>
         </div>
     </lightning:button>
-</aura:component>	
+</aura:component>

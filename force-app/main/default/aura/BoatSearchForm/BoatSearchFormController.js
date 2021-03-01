@@ -12,6 +12,26 @@
         component.set("v.selectedBoatType", selectedBoatType);
     },
     
+    onFormSubmit : function(component, event, helper){
+        let formSubmittedEvt = component.getEvent("formSubmittedEvt");
+        let selectedBoatType = component.find("boatTypes").get("v.value");
+        let data = {
+            "boatTypeId" : selectedBoatType
+        };
+        
+        formSubmittedEvt.setParams({
+            "formData": data
+        });
+        console.log("trying to fire event", formSubmittedEvt,selectedBoatType);
+        
+        try{
+            formSubmittedEvt.fire();
+        } catch(error){
+            console.error(error);
+        }
+        
+    },
+    
     onClickNewBoat : function(component, event, helper){
         
         // Obtenemos el selectedBoatType que esta guardado en el atributo
